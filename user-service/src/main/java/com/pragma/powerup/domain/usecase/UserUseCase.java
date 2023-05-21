@@ -17,16 +17,17 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public void saveUser(User user) {
-
+        userPersistencePort.saveUser(user);
     }
 
     @Override
     public User getUserById(Long id) {
-        return null;
+        return userPersistencePort.getUserById(id);
     }
 
     @Override
     public List<User> getAllUser() {
-        return null;
+
+        return userPersistencePort.getAllUser();
     }
 }

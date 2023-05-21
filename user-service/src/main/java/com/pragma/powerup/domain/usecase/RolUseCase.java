@@ -16,21 +16,21 @@ public class RolUseCase implements IRolServicePort {
 
     @Override
     public void saveRol(Rol rol) {
-
+        rolPersistencePort.saveRol(rol);
     }
 
     @Override
     public Rol getRolById(Long id) {
-        return null;
+        return rolPersistencePort.getRolId(id);
     }
 
     @Override
     public List<Rol> getAllRol() {
-        return null;
+        return rolPersistencePort.getAllRol();
     }
 
     @Override
     public void deleteRolById(Long id) {
-
+        rolPersistencePort.deleteRolById(id);
     }
 }

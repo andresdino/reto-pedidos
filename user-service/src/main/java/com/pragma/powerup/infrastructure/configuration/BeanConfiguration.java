@@ -21,8 +21,13 @@ public class BeanConfiguration {
         return new ObjectJpaAdapter(objectRepository, objectEntityMapper);
     }
 
+
+
     @Bean
     public IObjectServicePort objectServicePort() {
         return new ObjectUseCase(objectPersistencePort());
     }
+
+
+
 }

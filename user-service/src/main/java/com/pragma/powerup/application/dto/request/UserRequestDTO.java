@@ -37,6 +37,5 @@ public class UserRequestDTO {
 
     @NotBlank(message = "El campo clave es requerido")
     private String clave;
-
     private Long rol;
 }
