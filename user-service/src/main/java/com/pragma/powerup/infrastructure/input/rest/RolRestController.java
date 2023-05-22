@@ -20,15 +20,20 @@ public class RolRestController {
     private final IRolHandler rolHandler;
 
     @PostMapping("/")
-    public ResponseEntity<Void> guardarRol(@Valid @RequestBody RolRequestDTO rolRequestDto){
+    public ResponseEntity<Void> saveRol(@Valid @RequestBody RolRequestDTO rolRequestDto){
         rolHandler.saveRol(rolRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<RolResponseDTO>> obtenerTodosRoles(){
+    public ResponseEntity<List<RolResponseDTO>> getAllRoles(){
         return ResponseEntity.ok(rolHandler.getAllRol());
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RolResponseDTO> getRolById(@PathVariable(value = "id") Long rolId){
+        return ResponseEntity.ok(rolHandler.getRolById(rolId));
+    }
 
 }
