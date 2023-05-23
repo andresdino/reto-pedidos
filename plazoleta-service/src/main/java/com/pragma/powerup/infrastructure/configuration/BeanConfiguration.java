@@ -25,4 +25,5 @@ public class BeanConfiguration {
     public IObjectServicePort objectServicePort() {
         return new ObjectUseCase(objectPersistencePort());
     }
+
 }
