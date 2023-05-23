@@ -35,6 +35,7 @@ public class UserHandler implements IUserHandler {
     public UserResponseDTO getUserById(Long id) {
         UserResponseDTO userResponseDTO = userResponseMapper.toResponse(userServicePort.getUserById(id));
         return userResponseDTO;
+        
     }
 
     @Override

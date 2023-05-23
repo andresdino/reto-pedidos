@@ -15,7 +15,7 @@ public interface IUserResponseMapper {
 
     UserResponseDTO toResponse(User user);
 
-    List<UserResponseDTO> toResponseList(List<User> userModelList);
+    List<UserResponseDTO> toResponseList(List<User> userList);
 
 
 }
