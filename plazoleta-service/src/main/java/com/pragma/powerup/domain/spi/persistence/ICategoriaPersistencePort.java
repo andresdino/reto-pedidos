@@ -11,4 +11,6 @@ public interface ICategoriaPersistencePort {
     Categoria getCategoriaById(Long id);
 
     List<Categoria> getAllCategoria();
+
+    void deleteCategoriaById(Long id);
 }
