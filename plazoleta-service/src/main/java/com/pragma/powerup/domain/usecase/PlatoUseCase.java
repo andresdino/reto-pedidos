@@ -27,7 +27,7 @@ public class PlatoUseCase implements IPlatoServicePort {
     @Override
     public void savePlato(Plato plato) {
 
-        if(restaurantPersistencePort.getRestaurantById(plato.getRestauranteId().getId()) == null) {throw new DomainException("Restaurante no Existe");
+        if(restaurantPersistencePort.getRestaurantById(plato.getRestaurantId().getId()) == null) {throw new DomainException("Restaurante no Existe");
         }
         if(categoriaPersistencePort.getCategoriaById(plato.getCategoriaId().getId()) == null){ throw new DomainException("Categoria no Exsite");}
 

@@ -8,20 +8,20 @@ public class Plato {
     private String descripcion;
     private String urlImagen;
     private Boolean activo;
-    private Restaurant restauranteId;
+    private Restaurant restaurantId;
     private Categoria categoriaId;
 
     public Plato() {
     }
 
-    public Plato(Long id, String nombre, String precio, String descripcion, String urlImagen, Boolean activo, Restaurant restauranteId, Categoria categoriaId) {
+    public Plato(Long id, String nombre, String precio, String descripcion, String urlImagen, Boolean activo, Restaurant restaurantId, Categoria categoriaId) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.urlImagen = urlImagen;
         this.activo = activo;
-        this.restauranteId = restauranteId;
+        this.restaurantId = restaurantId;
         this.categoriaId = categoriaId;
     }
 
@@ -73,12 +73,12 @@ public class Plato {
         this.activo = activo;
     }
 
-    public Restaurant getRestauranteId() {
-        return restauranteId;
+    public Restaurant getRestaurantId() {
+        return restaurantId;
     }
 
     public void setRestauranteId(Restaurant restauranteId) {
-        this.restauranteId = restauranteId;
+        this.restaurantId = restauranteId;
     }
 
     public Categoria getCategoriaId() {
