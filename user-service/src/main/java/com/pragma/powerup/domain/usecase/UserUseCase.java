@@ -14,7 +14,6 @@ public class UserUseCase implements IUserServicePort {
 
 
 
-
     public UserUseCase(IUserPersistencePort userPersistencePort, IUserPassEncryptPort userPassEncryptPort) {
         this.userPersistencePort = userPersistencePort;
         this.userPassEncryptPort = userPassEncryptPort;
