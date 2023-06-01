@@ -37,4 +37,5 @@ public class UserRestController {
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable(value = "id") Long userId){
         return ResponseEntity.ok(userHandler.getUserById(userId));
     }
+
 }
