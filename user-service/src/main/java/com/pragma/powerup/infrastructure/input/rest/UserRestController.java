@@ -21,16 +21,16 @@ public class UserRestController {
     private final IUserHandler userHandler;
 
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<Void> saveUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
         userHandler.saveUser(userRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/get")
+
     public ResponseEntity<List<UserResponseDTO>> getAllUSers(){
         return ResponseEntity.ok(userHandler.getAllUser());
-
     }
 
     @GetMapping("/{id}")
