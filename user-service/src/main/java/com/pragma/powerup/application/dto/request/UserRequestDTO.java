@@ -2,6 +2,7 @@ package com.pragma.powerup.application.dto.request;
 
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
