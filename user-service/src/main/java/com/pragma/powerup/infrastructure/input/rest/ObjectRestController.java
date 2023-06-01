@@ -32,7 +32,7 @@ public class ObjectRestController {
             @ApiResponse(responseCode = "201", description = "Object created", content = @Content),
             @ApiResponse(responseCode = "409", description = "Object already exists", content = @Content)
     })
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Void> saveObject(@RequestBody ObjectRequestDto objectRequestDto) {
         objectHandler.saveObject(objectRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -45,7 +45,7 @@ public class ObjectRestController {
                             array = @ArraySchema(schema = @Schema(implementation = ObjectResponseDto.class)))),
             @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
     })
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<ObjectResponseDto>> getAllObjects() {
         return ResponseEntity.ok(objectHandler.getAllObjects());
     }

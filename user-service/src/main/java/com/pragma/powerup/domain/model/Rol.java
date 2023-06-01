@@ -23,7 +23,6 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
-
     public Long getId() {
         return id;
     }

@@ -27,14 +27,16 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
     @GetMapping("/")
+
     public ResponseEntity<List<UserResponseDTO>> getAllUSers(){
         return ResponseEntity.ok(userHandler.getAllUser());
-
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable(value = "id") Long userId){
         return ResponseEntity.ok(userHandler.getUserById(userId));
     }
+
 }
