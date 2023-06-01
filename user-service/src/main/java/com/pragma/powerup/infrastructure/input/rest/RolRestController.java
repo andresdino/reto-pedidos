@@ -19,13 +19,13 @@ public class RolRestController {
 
     private final IRolHandler rolHandler;
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<Void> saveRol(@Valid @RequestBody RolRequestDTO rolRequestDto){
         rolHandler.saveRol(rolRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public ResponseEntity<List<RolResponseDTO>> getAllRoles(){
         return ResponseEntity.ok(rolHandler.getAllRol());
     }
