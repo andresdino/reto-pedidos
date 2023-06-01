@@ -27,6 +27,7 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
     @GetMapping("/")
 
     public ResponseEntity<List<UserResponseDTO>> getAllUSers(){
