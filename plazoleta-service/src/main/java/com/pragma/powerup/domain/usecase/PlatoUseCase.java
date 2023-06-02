@@ -51,4 +51,8 @@ public class PlatoUseCase implements IPlatoServicePort {
     public void deletePlatoById(Long id) {
         platoPersistencePort.deletePlatoById(id);
     }
+
+    @Override
+    public void putPlato(Plato plato) {
+    }
 }

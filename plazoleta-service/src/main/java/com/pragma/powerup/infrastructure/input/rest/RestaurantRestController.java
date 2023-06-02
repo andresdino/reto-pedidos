@@ -18,13 +18,13 @@ public class RestaurantRestController {
 
     private final IRestaurantHandler restaurantHandler;
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<Void> saveRestaurant(@Valid @RequestBody RestaurantRequestDTO restaurantRequestDTO){
         restaurantHandler.saveRestaurant(restaurantRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public ResponseEntity<List<RestaurantResponseDTO>> getAllRestaurant(){
         return ResponseEntity.ok(restaurantHandler.getAllRestaurant());
     }
