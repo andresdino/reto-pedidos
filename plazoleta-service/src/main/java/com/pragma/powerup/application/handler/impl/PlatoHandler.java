@@ -1,6 +1,7 @@
 package com.pragma.powerup.application.handler.impl;
 
 import com.pragma.powerup.application.dto.request.PlatoRequestDTO;
+import com.pragma.powerup.application.dto.request.PlatoRequestPutDTO;
 import com.pragma.powerup.application.dto.response.PlatoResponseDTO;
 import com.pragma.powerup.application.handler.IPlatoHandler;
 import com.pragma.powerup.application.mapper.request.IPlatoRequestMapper;
@@ -49,5 +50,13 @@ public class PlatoHandler implements IPlatoHandler {
     @Override
     public void deletePlatoById(Long id) {
                     platoServicePort.deletePlatoById(id);
+    }
+
+    @Override
+    public void putPlato(PlatoRequestPutDTO platoRequestPutDTO) {
+
+        Plato plato = platoRequestMapper.toPutPlato(platoRequestPutDTO);
+        platoServicePort.putPlato(plato);
+
     }
 }

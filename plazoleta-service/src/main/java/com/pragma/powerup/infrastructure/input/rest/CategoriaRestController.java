@@ -25,7 +25,7 @@ public class CategoriaRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public ResponseEntity<List<CategoriaResponseDTO>> getAllCategorias(){
         return ResponseEntity.ok(categoriaHandler.getAllCategoria());
     }

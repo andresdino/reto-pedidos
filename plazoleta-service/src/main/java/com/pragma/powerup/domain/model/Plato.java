@@ -25,6 +25,12 @@ public class Plato {
         this.categoriaId = categoriaId;
     }
 
+    public Plato( Long id, String precio, String descripcion) {
+        this.id = id;
+        this.precio = precio;
+        this.descripcion = descripcion;
+    }
+
     public Long getId() {
         return id;
     }

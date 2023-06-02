@@ -2,6 +2,7 @@ package com.pragma.powerup.infrastructure.input.rest;
 
 
 import com.pragma.powerup.application.dto.request.PlatoRequestDTO;
+import com.pragma.powerup.application.dto.request.PlatoRequestPutDTO;
 import com.pragma.powerup.application.dto.response.PlatoResponseDTO;
 import com.pragma.powerup.application.handler.IPlatoHandler;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,13 @@ public class PlatoRestController {
     public ResponseEntity<Void> savePlato(@Valid @RequestBody PlatoRequestDTO platoRequestDTO){
         platoHandler.savePlato(platoRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> PutPlato (@PathVariable (value = "id") Long id, @Valid @RequestBody PlatoRequestPutDTO platoRequestPutDTO) {
+        platoHandler.putPlato(platoRequestPutDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -41,16 +49,5 @@ public class PlatoRestController {
         platoHandler.deletePlatoById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
