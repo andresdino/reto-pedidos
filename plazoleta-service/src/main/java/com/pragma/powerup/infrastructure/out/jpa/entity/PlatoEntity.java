@@ -42,6 +42,7 @@ public class PlatoEntity {
     @Column(name = "activo")
     private Boolean activo;
 
+
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="resturante_id")

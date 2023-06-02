@@ -19,7 +19,7 @@ public class CategoriaRestController {
 
     private final ICategoriaHandler categoriaHandler;
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<Void> saveCategoria(@Valid @RequestBody CategoriaRequestDTO categoriaRequestDto){
         categoriaHandler.saveCategoria(categoriaRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);

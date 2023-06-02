@@ -20,7 +20,7 @@ public class PlatoRestController {
 
     private final IPlatoHandler platoHandler;
 
-    @PostMapping("/")
+    @PostMapping("/save")
     public ResponseEntity<Void> savePlato(@Valid @RequestBody PlatoRequestDTO platoRequestDTO){
         platoHandler.savePlato(platoRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -31,7 +31,7 @@ public class PlatoRestController {
         return ResponseEntity.ok(platoHandler.getPlatoById(id));
     }
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public ResponseEntity<List<PlatoResponseDTO>> getAllPlato(){
         return ResponseEntity.ok(platoHandler.getAllPlatos());
     }
