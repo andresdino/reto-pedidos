@@ -42,5 +42,7 @@ class ObjectUseCaseTest {
 
     @Test
     void getAllObjects() {
+
+        var data = objectUseCase.getAllObjects();
     }
 }
