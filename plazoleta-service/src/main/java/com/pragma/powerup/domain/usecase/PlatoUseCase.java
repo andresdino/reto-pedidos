@@ -55,27 +55,27 @@ public class PlatoUseCase implements IPlatoServicePort {
 
     @Override
     public void putPlato( Long id,Plato plato) {
-        Plato plato2 = platoPersistencePort.getPlatoById(id);
-        if(plato2==null) {
+        Plato platoPut = platoPersistencePort.getPlatoById(id);
+        if(platoPut==null) {
             throw new PlatoNoExisteException();
         }
 
-        plato2.setPrecio(plato.getPrecio());
-        plato2.setDescripcion(plato.getDescripcion());
+        platoPut.setPrecio(plato.getPrecio());
+        platoPut.setDescripcion(plato.getDescripcion());
 
-        platoPersistencePort.savePlato(plato2);
+        platoPersistencePort.savePlato(platoPut);
     }
 
     @Override
     public void putEnableDisablePlato(Long platoId, Long flag) {
-        Plato plato2 = platoPersistencePort.getPlatoById(platoId);
-        if(plato2==null) {
+        Plato platoPut = platoPersistencePort.getPlatoById(platoId);
+        if(platoPut==null) {
             throw new PlatoNoExisteException();
         }
 
         boolean isEnableOrDisable = (flag==1)?true:false;
-        plato2.setActivo(isEnableOrDisable);
+        platoPut.setActivo(isEnableOrDisable);
 
-        platoPersistencePort.savePlato(plato2);
+        platoPersistencePort.savePlato(platoPut);
     }
 }
