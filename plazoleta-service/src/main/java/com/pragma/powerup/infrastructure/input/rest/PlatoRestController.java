@@ -6,6 +6,11 @@ import com.pragma.powerup.application.dto.request.PlatoRequestPutDTO;
 import com.pragma.powerup.application.dto.response.PlatoResponseDTO;
 import com.pragma.powerup.application.handler.IPlatoHandler;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
@@ -35,11 +40,19 @@ public class PlatoRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /*@PutMapping("/{id}")
+    @Operation(summary = "Enable or disable dish")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dish enable/disable",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = PlatoRequestDTO.class)))),
+            @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
+    })
+
+    @PutMapping("/{id}/activate/{enableDisable}")
     public ResponseEntity<PlatoRequestDTO> putEnableDisablePlato(@PathVariable (value = "id") Long platoId, @PathVariable(value = "enableDisable") Long enableDisable){
         platoHandler.putEnableDiseablePlato(platoId, enableDisable);
         return new ResponseEntity<>(HttpStatus.OK);
-    }*/
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PlatoResponseDTO> getPlatoId(@PathVariable(value = "id") Long id){
