@@ -16,5 +16,7 @@ public interface IPlatoHandler {
 
     void deletePlatoById(Long id);
 
-    void putPlato(PlatoRequestPutDTO platoRequestPutDTO);
+    void putPlato(Long id, PlatoRequestPutDTO platoRequestPutDTO);
+
+    void putEnableDiseablePlato(Long platoId, Long flag);
 }

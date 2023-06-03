@@ -6,6 +6,7 @@ import com.pragma.powerup.domain.model.Plato;
 import com.pragma.powerup.domain.spi.persistence.ICategoriaPersistencePort;
 import com.pragma.powerup.domain.spi.persistence.IPlatoPersistencePort;
 import com.pragma.powerup.domain.spi.persistence.IRestaurantPersistencePort;
+import com.pragma.powerup.infrastructure.exception.PlatoNoExisteException;
 
 import java.util.List;
 
@@ -53,6 +54,28 @@ public class PlatoUseCase implements IPlatoServicePort {
     }
 
     @Override
-    public void putPlato(Plato plato) {
+    public void putPlato( Long id,Plato plato) {
+        Plato plato2 = platoPersistencePort.getPlatoById(id);
+        if(plato2==null) {
+            throw new PlatoNoExisteException();
+        }
+
+        plato2.setPrecio(plato.getPrecio());
+        plato2.setDescripcion(plato.getDescripcion());
+
+        platoPersistencePort.savePlato(plato2);
+    }
+
+    @Override
+    public void putEnableDisablePlato(Long platoId, Long flag) {
+        Plato plato2 = platoPersistencePort.getPlatoById(platoId);
+        if(plato2==null) {
+            throw new PlatoNoExisteException();
+        }
+
+        boolean isEnableOrDisable = (flag==1)?true:false;
+        plato2.setActivo(isEnableOrDisable);
+
+        platoPersistencePort.savePlato(plato2);
     }
 }

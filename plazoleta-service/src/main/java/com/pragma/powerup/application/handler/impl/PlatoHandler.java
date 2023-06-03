@@ -53,10 +53,14 @@ public class PlatoHandler implements IPlatoHandler {
     }
 
     @Override
-    public void putPlato(PlatoRequestPutDTO platoRequestPutDTO) {
+    public void putPlato(Long id ,PlatoRequestPutDTO platoRequestPutDTO) {
 
         Plato plato = platoRequestMapper.toPutPlato(platoRequestPutDTO);
-        platoServicePort.putPlato(plato);
+        platoServicePort.putPlato( id, plato);
+    }
 
+    @Override
+    public void putEnableDiseablePlato (Long platoId,Long flag){
+        platoServicePort.putEnableDisablePlato(platoId,flag);
     }
 }
