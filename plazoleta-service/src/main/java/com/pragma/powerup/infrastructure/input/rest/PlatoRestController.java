@@ -5,6 +5,7 @@ import com.pragma.powerup.application.dto.request.PlatoRequestDTO;
 import com.pragma.powerup.application.dto.request.PlatoRequestPutDTO;
 import com.pragma.powerup.application.dto.response.PlatoResponseDTO;
 import com.pragma.powerup.application.handler.IPlatoHandler;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.http.HttpStatus;
@@ -29,10 +30,16 @@ public class PlatoRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> PutPlato (@PathVariable (value = "id") Long id, @Valid @RequestBody PlatoRequestPutDTO platoRequestPutDTO) {
-        platoHandler.putPlato(platoRequestPutDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<PlatoRequestDTO> PutPlato (@PathVariable (value = "id") Long platoId, @Valid @RequestBody PlatoRequestPutDTO platoRequestPutDTO) {
+        platoHandler.putPlato(platoId ,platoRequestPutDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /*@PutMapping("/{id}")
+    public ResponseEntity<PlatoRequestDTO> putEnableDisablePlato(@PathVariable (value = "id") Long platoId, @PathVariable(value = "enableDisable") Long enableDisable){
+        platoHandler.putEnableDiseablePlato(platoId, enableDisable);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<PlatoResponseDTO> getPlatoId(@PathVariable(value = "id") Long id){
