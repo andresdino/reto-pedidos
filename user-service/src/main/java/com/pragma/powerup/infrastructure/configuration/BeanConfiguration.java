@@ -7,9 +7,11 @@ import com.pragma.powerup.domain.spi.IObjectPersistencePort;
 import com.pragma.powerup.domain.spi.password.IUserPassEncryptPort;
 import com.pragma.powerup.domain.spi.persistence.IRolPersistencePort;
 import com.pragma.powerup.domain.spi.persistence.IUserPersistencePort;
+import com.pragma.powerup.domain.spi.token.IToken;
 import com.pragma.powerup.domain.usecase.ObjectUseCase;
 import com.pragma.powerup.domain.usecase.RolUseCase;
 import com.pragma.powerup.domain.usecase.UserUseCase;
+import com.pragma.powerup.infrastructure.out.jpa.Token.TokenAdapter;
 import com.pragma.powerup.infrastructure.out.jpa.adapter.ObjectJpaAdapter;
 import com.pragma.powerup.infrastructure.out.jpa.adapter.RolJpaAdapter;
 import com.pragma.powerup.infrastructure.out.jpa.adapter.UserJpaAdapter;
@@ -59,7 +61,12 @@ public class BeanConfiguration {
 
     @Bean
     public IUserServicePort userServicePort(){
-        return new UserUseCase(userPersistencePort(), userPassEncryptPort());
+        return new UserUseCase(userPersistencePort(), userPassEncryptPort(),token());
+    }
+
+    @Bean
+    public IToken token(){
+        return new TokenAdapter();
     }
 
     @Bean
