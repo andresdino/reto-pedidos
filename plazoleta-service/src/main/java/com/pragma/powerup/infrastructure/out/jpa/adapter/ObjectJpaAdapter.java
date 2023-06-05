@@ -31,4 +31,6 @@ public class ObjectJpaAdapter implements IObjectPersistencePort {
         }
         return objectEntityMapper.toObjectModelList(entityList);
     }
+
+
 }
