@@ -4,6 +4,7 @@ import com.pragma.powerup.domain.model.Rol;
 import com.pragma.powerup.domain.model.User;
 import com.pragma.powerup.domain.spi.password.IUserPassEncryptPort;
 import com.pragma.powerup.domain.spi.persistence.IUserPersistencePort;
+import com.pragma.powerup.domain.spi.token.IToken;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,11 @@ class UserUseCaseTest {
     IUserPassEncryptPort iUserPassEncryptPortMock;
     @Mock
     IUserPersistencePort iUserPersistencePortMock;
+
+    @Mock
+    IToken token;
+    @InjectMocks
+    Rol rol = new Rol();
     @InjectMocks
     User user;
 
@@ -39,6 +45,12 @@ class UserUseCaseTest {
         user1.setCorreo("sdvg@dsf");
         user1.setClave("123");
         user1.setId((long) 1);
+        user1.setId(1L);
+        rol.setId(1L);
+        user1.setRol(rol);
+        Mockito.when(token.getBearerToken()).thenReturn("Bearer token");
+        Mockito.when(token.getUsuarioAutenticadoRol("Bearer token")).thenReturn("ADMIN");
+
         Mockito.when(iUserPersistencePortMock.getUserById(1L)).thenReturn(user1);
 
         List<User> clasUseList = new ArrayList<>();
@@ -65,5 +77,10 @@ class UserUseCaseTest {
     @Test
     void getAllUser() {
         var data = userUseCase.getAllUser();
+    }
+
+    @Test
+    void validateRolesAuthAndNot(){
+        userUseCase.saveUser(user1);
     }
 }
