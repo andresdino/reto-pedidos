@@ -54,7 +54,7 @@ public class PlatoUseCase implements IPlatoServicePort {
     }
 
     @Override
-    public void putPlato( Long id,Plato plato) {
+    public short putPlato(Long id, Plato plato) {
         Plato platoPut = platoPersistencePort.getPlatoById(id);
         if(platoPut==null) {
             throw new PlatoNoExisteException();
@@ -64,6 +64,7 @@ public class PlatoUseCase implements IPlatoServicePort {
         platoPut.setDescripcion(plato.getDescripcion());
 
         platoPersistencePort.savePlato(platoPut);
+        return 0;
     }
 
     @Override

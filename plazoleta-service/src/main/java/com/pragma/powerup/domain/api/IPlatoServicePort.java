@@ -16,7 +16,7 @@ public interface IPlatoServicePort {
 
     void deletePlatoById(Long id);
 
-    void putPlato(Long id,Plato plato);
+    short putPlato(Long id, Plato plato);
 
     void putEnableDisablePlato(Long platoId, Long flag);
 
