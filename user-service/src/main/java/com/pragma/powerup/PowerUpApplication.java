@@ -9,6 +9,5 @@ public class PowerUpApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PowerUpApplication.class, args);
-		System.out.println("pass: " + new BCryptPasswordEncoder().encode("arepa"));
 	}
 }

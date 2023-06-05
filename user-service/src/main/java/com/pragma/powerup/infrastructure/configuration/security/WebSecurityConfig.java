@@ -34,6 +34,7 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests()
+                .mvcMatchers("/api/v1/user/","/api/v1/user/client","/swagger-ui/**", "/swagger-resources/**","/v3/api-docs/**", "/v2/api-docs/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -69,7 +70,12 @@ public class WebSecurityConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
         }
+
+    public static void main(String[] args) {
+        System.out.println("pass: " + new BCryptPasswordEncoder().encode("password"));
     }
+}
+
 
 
 
