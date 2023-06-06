@@ -15,6 +15,5 @@ public interface IUserServicePort {
    List<User> getAllUser();
 
 
-
-
+    void saveRestaurantEmployee(User user);
 }
