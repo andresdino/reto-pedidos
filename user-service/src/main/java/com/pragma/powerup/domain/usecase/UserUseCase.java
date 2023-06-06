@@ -1,8 +1,12 @@
 package com.pragma.powerup.domain.usecase;
 
 import com.pragma.powerup.domain.api.IUserServicePort;
+import com.pragma.powerup.domain.model.RestaurantEmployeeModel;
+import com.pragma.powerup.domain.model.RestaurantModel;
 import com.pragma.powerup.domain.model.Rol;
 import com.pragma.powerup.domain.model.User;
+import com.pragma.powerup.domain.spi.feing.IClientFeignPort;
+import com.pragma.powerup.domain.spi.feing.IEmployeeFeignClientPort;
 import com.pragma.powerup.domain.spi.password.IUserPassEncryptPort;
 import com.pragma.powerup.domain.spi.persistence.IUserPersistencePort;
 import com.pragma.powerup.domain.spi.token.IToken;
@@ -13,14 +17,21 @@ public class UserUseCase implements IUserServicePort {
 
     private final IUserPersistencePort userPersistencePort;
     private final IUserPassEncryptPort userPassEncryptPort;
+
+    private final IEmployeeFeignClientPort employeeFeignClientPort;
+
+    private final IClientFeignPort clientFeignPort;
+
     private final IToken token;
 
 
 
-    public UserUseCase(IUserPersistencePort userPersistencePort, IUserPassEncryptPort userPassEncryptPort, IToken token) {
+    public UserUseCase(IUserPersistencePort userPersistencePort, IUserPassEncryptPort userPassEncryptPort, IToken token,IClientFeignPort clientFeignPort, IEmployeeFeignClientPort employeeFeignClientPort ) {
         this.userPersistencePort = userPersistencePort;
         this.userPassEncryptPort = userPassEncryptPort;
         this.token = token;
+        this.clientFeignPort = clientFeignPort;
+        this.employeeFeignClientPort = employeeFeignClientPort;
     }
 
 
@@ -42,22 +53,17 @@ public class UserUseCase implements IUserServicePort {
         }
 
         if(rolS.equals("PROPIETARIO")){
-            //Puede crear empleados
             rol.setId(3L);
         }else if(rolS.equals("ADMIN")){
-            //Puede crear propietarios
             rol.setId(2L);
         }else{
             if(user.getRol().getId()==null){
                 rol.setId(4L);
             }else
             if(user.getRol().getId()==1){
-                //Si entra aqui, se registra un ADMIN
                 System.out.println("Se esta registrando un ADMIN");
             }
-
         }
-        //Si el Rol no es nulo, puede setearse al usuario, (Se valida ya que al ADMIN solo se le pasa el rol en el body del JSON)
         if(!(rol.getId()==null)){
             user.setRol(rol);
         }
@@ -73,5 +79,29 @@ public class UserUseCase implements IUserServicePort {
     public List<User> getAllUser() {
 
         return userPersistencePort.getAllUser();
+    }
+
+    @Override
+    public void saveRestaurantEmployee(User user) {
+        RestaurantEmployeeModel restaurantEmployeeModel = new RestaurantEmployeeModel();
+        String bearerToken = token.getBearerToken();
+        Long idOwnerAuth = token.getUsuarioAutenticadoId(bearerToken);
+
+        RestaurantModel restaurant = clientFeignPort.getRestaurantByIdPropietario(idOwnerAuth);
+
+        String restaurantId = String.valueOf(restaurant.getId());
+
+        System.out.println(restaurantId);
+
+        String employee_id = String.valueOf(userPersistencePort.getUserByCorreo(user.getCorreo()).getId());
+
+        System.out.println(employee_id);
+
+        restaurantEmployeeModel.setRestaurantId(restaurantId);
+
+        restaurantEmployeeModel.setPersonId(employee_id);
+
+        employeeFeignClientPort.saveRestaurantEmployee(restaurantEmployeeModel);
+
     }
 }

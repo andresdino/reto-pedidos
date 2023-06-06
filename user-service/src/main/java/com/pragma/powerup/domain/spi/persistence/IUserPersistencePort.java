@@ -9,5 +9,11 @@ public interface IUserPersistencePort {
 
     User getUserById(Long id);
 
+    User getUserByCorreo(String correo);
+
+    Boolean existsUserById(Long id);
+
     List<User> getAllUser();
+
+    void deleteUserById(Long id);
 }
