@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class RestaurantEmployee {
 
     private Long id;
@@ -17,4 +14,37 @@ public class RestaurantEmployee {
     private String restaurantId;
 
     private String personId;
+
+    public RestaurantEmployee() {
+    }
+
+    public RestaurantEmployee(Long id, String restaurantId, String personId) {
+        this.id = id;
+        this.restaurantId = restaurantId;
+        this.personId = personId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
 }

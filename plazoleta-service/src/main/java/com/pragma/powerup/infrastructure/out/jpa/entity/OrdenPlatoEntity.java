@@ -19,10 +19,17 @@ public class OrdenPlatoEntity {
     @Id
     @Column(name = "pedido_plato_id", nullable = false)
     private Long id;
+
+
+
+    @ManyToOne
     @JoinColumn(name = "pedido_id", nullable = false)
-    private OrdenEntity pedido;
+    private OrdenEntity orden;
+
+    @ManyToOne
     @JoinColumn(name = "plato_id", nullable = false)
     private PlatoEntity plato;
+
     @Column(name = "cantidad", nullable = false)
     private String cantidad;
 }

@@ -18,10 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/order")
 @RequiredArgsConstructor
+
 public class OrdenRestController {
 
 
     private final IOrdenHandler ordenHandler;
+
+
 
     @Operation(summary = "Add a new order")
     @ApiResponses(value = {
@@ -98,18 +101,21 @@ public class OrdenRestController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @Operation(summary = "Cancel Order")
+    /*@Operation(summary = "Cancel Order")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Order cancel", content = @Content),
             @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
+
     @PutMapping("/cancelOrder/{idOrder}")
     @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long idOrder){
         if(idOrder <= 0L)  return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         ordenHandler.cancelOrden(idOrder);
         return ResponseEntity.status(HttpStatus.OK).build();
-    }
+    }*/
+
+
 }

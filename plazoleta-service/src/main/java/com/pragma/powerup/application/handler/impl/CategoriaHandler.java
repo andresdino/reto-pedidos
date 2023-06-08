@@ -14,14 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Service
 @Transactional
+
 public class CategoriaHandler implements ICategoriaHandler {
     private final ICategoriaServicePort categoriaServicePort;
     private final ICategoriaResponseMapper categoriaResponseMapper;
     private final ICategoriaRequestMapper categoriaRequestMapper;
 
+    public CategoriaHandler(ICategoriaServicePort categoriaServicePort, ICategoriaResponseMapper categoriaResponseMapper, ICategoriaRequestMapper categoriaRequestMapper) {
+        this.categoriaServicePort = categoriaServicePort;
+        this.categoriaResponseMapper = categoriaResponseMapper;
+        this.categoriaRequestMapper = categoriaRequestMapper;
+    }
 
     @Override
     public void saveCategoria(CategoriaRequestDTO categoriaRequestDTO) {
