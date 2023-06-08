@@ -34,6 +34,16 @@ public class UserJpaAdapter  implements IUserPersistencePort {
     }
 
     @Override
+    public User getUserByCorreo(String correo) {
+        return null;
+    }
+
+    @Override
+    public Boolean existsUserById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<User> getAllUser() {
         List<UserEntity> userEntityList =  userRepository.findAll();
         if(userEntityList.isEmpty()){
@@ -41,5 +51,10 @@ public class UserJpaAdapter  implements IUserPersistencePort {
         }
 
         return userEntityMapper.toUserModelList(userEntityList);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+
     }
 }

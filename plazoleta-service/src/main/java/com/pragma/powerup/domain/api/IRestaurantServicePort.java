@@ -13,5 +13,11 @@ public interface IRestaurantServicePort {
 
     Restaurant getRestaurantById(Long id);
 
+    Restaurant getRestaurantByIdPropietario(Long idpropietario);
+
+    List<Restaurant> getRestaurantsWithPagination(Integer page, Integer size);
+
     List<Restaurant> getAllRestaurant();
+
+    void deleteRestaurantById(Long id);
 }

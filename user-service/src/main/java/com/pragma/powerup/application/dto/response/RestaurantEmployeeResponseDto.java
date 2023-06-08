@@ -9,9 +9,7 @@ import lombok.Setter;
 public class RestaurantEmployeeResponseDto {
 
     private Long id;
-
     private String restaurantId;
-
     private String personId;
 }
 

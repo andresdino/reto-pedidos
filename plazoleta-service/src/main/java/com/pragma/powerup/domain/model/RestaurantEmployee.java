@@ -17,5 +17,4 @@ public class RestaurantEmployee {
     private String restaurantId;
 
     private String personId;
-
 }

@@ -1,29 +1,19 @@
 package com.pragma.powerup.infrastructure.configuration;
 
-import com.pragma.powerup.domain.api.ICategoriaServicePort;
-import com.pragma.powerup.domain.api.IObjectServicePort;
-import com.pragma.powerup.domain.api.IPlatoServicePort;
-import com.pragma.powerup.domain.api.IRestaurantServicePort;
+import com.pragma.powerup.domain.api.*;
 import com.pragma.powerup.domain.spi.IObjectPersistencePort;
-import com.pragma.powerup.domain.spi.persistence.ICategoriaPersistencePort;
-import com.pragma.powerup.domain.spi.persistence.IPlatoPersistencePort;
-import com.pragma.powerup.domain.spi.persistence.IRestaurantPersistencePort;
-import com.pragma.powerup.domain.usecase.CategoriaUseCase;
-import com.pragma.powerup.domain.usecase.ObjectUseCase;
-import com.pragma.powerup.domain.usecase.PlatoUseCase;
-import com.pragma.powerup.domain.usecase.RestaurantUseCase;
-import com.pragma.powerup.infrastructure.out.jpa.adapter.CategoriaAdapter;
-import com.pragma.powerup.infrastructure.out.jpa.adapter.ObjectJpaAdapter;
-import com.pragma.powerup.infrastructure.out.jpa.adapter.PlatoAdapter;
-import com.pragma.powerup.infrastructure.out.jpa.adapter.RestaurantAdapter;
-import com.pragma.powerup.infrastructure.out.jpa.mapper.ICategoriaEntityMapper;
-import com.pragma.powerup.infrastructure.out.jpa.mapper.IObjectEntityMapper;
-import com.pragma.powerup.infrastructure.out.jpa.mapper.IPlatoEntityMapper;
-import com.pragma.powerup.infrastructure.out.jpa.mapper.IRestaurantEntityMapper;
-import com.pragma.powerup.infrastructure.out.jpa.repository.ICategoriaRepository;
-import com.pragma.powerup.infrastructure.out.jpa.repository.IObjectRepository;
-import com.pragma.powerup.infrastructure.out.jpa.repository.IPlatoRepository;
-import com.pragma.powerup.infrastructure.out.jpa.repository.IRestaurantRepository;
+import com.pragma.powerup.domain.spi.IToken;
+import com.pragma.powerup.domain.spi.feignClients.IUserFeignClientPort;
+import com.pragma.powerup.domain.spi.persistence.*;
+import com.pragma.powerup.domain.api.IRestaurantEmployeeServicePort;
+import com.pragma.powerup.domain.usecase.*;
+import com.pragma.powerup.infrastructure.out.jpa.adapter.*;
+import com.pragma.powerup.infrastructure.out.jpa.feignClients.UserFeignClients;
+import com.pragma.powerup.infrastructure.out.jpa.feignClients.adapter.UserFeignAdapter;
+import com.pragma.powerup.infrastructure.out.jpa.feignClients.mapper.IUserDTOMapper;
+import com.pragma.powerup.infrastructure.out.jpa.mapper.*;
+import com.pragma.powerup.infrastructure.out.jpa.repository.*;
+import com.pragma.powerup.infrastructure.out.jpa.token.TokenAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,12 +27,42 @@ public class BeanConfiguration {
     private final IRestaurantRepository restaurantRepository;
     private final IRestaurantEntityMapper restaurantEntityMapper;
 
-    private final ICategoriaRepository categoriaRepository;
-    private final ICategoriaEntityMapper categoriaEntityMapper;
-
     private final IPlatoRepository platoRepository;
     private final IPlatoEntityMapper platoEntityMapper;
 
+    private final ICategoriaRepository categoriaRepository;
+    private final ICategoriaEntityMapper categoriaEntityMapper;
+
+
+    private final UserFeignClients userFeignClient;
+    private final IUserDTOMapper userDTOMapper;
+
+    private  final IRestaurantEmployeeRepository restaurantEmployeeRepository;
+    private final IRestaurantEmployeeEntityMapper restaurantEmployeeEntityMapper;
+
+    private final IOrdenRepository ordenRepository;
+    private final IOrdenEntityMapper ordenEntityMapper;
+
+    private  final IOrdenPlatoRepository ordenPlatoRepository;
+    private final IOrdenPlatoEntityMapper ordenPlatoEntityMapper;
+
+    @Bean
+    public IRestaurantPersistencePort restaurantPersistencePort(){
+        return new RestaurantAdapter(restaurantRepository, restaurantEntityMapper);
+    }
+    @Bean
+    public IUserFeignClientPort userFeignClientPort(){
+        return new UserFeignAdapter(userFeignClient, userDTOMapper);
+    }
+
+    @Bean
+    public IRestaurantServicePort restaurantServicePort(){
+        return new RestaurantUseCase(restaurantPersistencePort(), userFeignClientPort());
+    }
+
+    public IToken token(){
+        return new TokenAdapter();
+    }
     @Bean
     public IObjectPersistencePort objectPersistencePort() {
         return new ObjectJpaAdapter(objectRepository, objectEntityMapper);
@@ -53,7 +73,6 @@ public class BeanConfiguration {
         return new ObjectUseCase(objectPersistencePort());
     }
 
-    //Creamos Beans para Plato
 
     @Bean
     public IPlatoPersistencePort platoPersistencePort(){
@@ -66,8 +85,6 @@ public class BeanConfiguration {
     }
 
 
-    //Creamos Beans para CAtegoria
-
     @Bean
     public ICategoriaPersistencePort categoriaPersistencePort(){
         return new CategoriaAdapter(categoriaRepository, categoriaEntityMapper);
@@ -78,16 +95,24 @@ public class BeanConfiguration {
     }
 
 
-
-    //Creamos los Beans de Restaurant
-
-    @Bean
-    public IRestaurantPersistencePort restaurantPersistencePort(){
-        return new RestaurantAdapter(restaurantRepository, restaurantEntityMapper);
+    private IRestaurantEmployeePersistencePort restaurantEmployeePersistencePort() {
+        return new RestaurantEmployeeJpaAdapter(restaurantEmployeeRepository, restaurantEmployeeEntityMapper);
     }
 
     @Bean
-    public IRestaurantServicePort restaurantServicePort(){
-        return new RestaurantUseCase(restaurantPersistencePort());
+    public IRestaurantEmployeeServicePort restaurantEmployeeServicePort(){
+        return new RestaurantEmployeeUseCase(restaurantEmployeePersistencePort());
     }
+
+    @Bean
+    public IOrdenPersistencePort orderPersistencePort(){
+        return new OrderAdapter(ordenRepository, ordenEntityMapper, ordenPlatoRepository, ordenPlatoEntityMapper);
+    }
+
+
+    @Bean
+    public IOrdenServicePort orderServicePort(){
+        return new OrdenUseCase(orderPersistencePort(), token(), restaurantPersistencePort(), platoPersistencePort(), restaurantEmployeePersistencePort(), userFeignClientPort());
+    }
+
 }
