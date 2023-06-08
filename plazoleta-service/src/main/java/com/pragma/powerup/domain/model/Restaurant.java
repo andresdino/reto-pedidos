@@ -3,7 +3,9 @@ package com.pragma.powerup.domain.model;
 public class Restaurant {
 
     private Long id;
+
     private String nombre;
+
     private String nit;
 
     private String direccion;

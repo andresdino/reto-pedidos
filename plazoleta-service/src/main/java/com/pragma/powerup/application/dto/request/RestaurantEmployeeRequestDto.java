@@ -14,5 +14,4 @@ public class RestaurantEmployeeRequestDto {
 
     @NotBlank(message = "se requiere el empleado_id")
     private String personId;
-
 }

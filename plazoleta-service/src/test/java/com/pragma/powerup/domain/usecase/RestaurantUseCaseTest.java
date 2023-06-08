@@ -40,7 +40,7 @@ class RestaurantUseCaseTest {
         List<Restaurant> clasRestaurantList = new ArrayList<>();
 
         clasRestaurantList.add(restaurant);
-        Mockito.when(iRestaurantPersistencePortMock.getAllRestaurant()).thenReturn(clasRestaurantList);
+        Mockito.when(iRestaurantPersistencePortMock.getAllRestaurants()).thenReturn(clasRestaurantList);
     }
 
     @AfterEach
