@@ -40,7 +40,7 @@ public class OrdenRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "Get Orders By State")
+   /* @Operation(summary = "Get Orders By State")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "302", description = "Orders found", content = @Content),
             @ApiResponse(responseCode = "404", description = "Orders don't exists", content = @Content),
@@ -55,7 +55,7 @@ public class OrdenRestController {
         return ResponseEntity.ok(ordenHandler.getAllOrdenesWithPagination(page, size, estado));
     }
 
-    @Operation(summary = "Take order and update status")
+ /*   @Operation(summary = "Take order and update status")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Order taken", content = @Content),
             @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
@@ -69,7 +69,7 @@ public class OrdenRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         ordenHandler.takeOrdenAndUpdateStatus(idOrder, status);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
+    }*/
 
     @Operation(summary = "Order ready")
     @ApiResponses(value = {

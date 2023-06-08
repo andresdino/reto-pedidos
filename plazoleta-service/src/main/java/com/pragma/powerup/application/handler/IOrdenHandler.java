@@ -8,7 +8,7 @@ import java.util.List;
 public interface IOrdenHandler {
 
     void saveOrden(OrdenRequestDTO ordenRequest);
-    List<OrdenResponseDTO> getAllOrdenesWithPagination(Integer page, Integer size, String estado);
+   // List<OrdenResponseDTO> getAllOrdenesWithPagination(Integer page, Integer size, String estado);
 
     void takeOrdenAndUpdateStatus(Long idOrden, String estado);
 

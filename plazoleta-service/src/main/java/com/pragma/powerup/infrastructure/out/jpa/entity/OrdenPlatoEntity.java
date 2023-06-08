@@ -24,7 +24,7 @@ public class OrdenPlatoEntity {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id", nullable = false)
-    private OrdenEntity orden;
+    private OrdenEntity pedido;
 
     @ManyToOne
     @JoinColumn(name = "plato_id", nullable = false)
