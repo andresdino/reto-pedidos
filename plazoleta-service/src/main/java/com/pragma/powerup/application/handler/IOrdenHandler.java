@@ -14,7 +14,8 @@ public interface IOrdenHandler {
 
     void updateAndNotifyOrdenReady(Long idOrden);
 
+
     void deliverOrden(Long idOrden, String pin);
 
-    void cancelOrden(Long idOrden);
+   // void cancelOrden(Long idOrden);
 }
