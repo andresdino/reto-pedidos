@@ -1,6 +1,7 @@
 package com.pragma.powerup.application.mapper.response;
 
 import com.pragma.powerup.application.dto.request.OrdenRequestDTO;
+import com.pragma.powerup.application.dto.response.OrdenResponseDTO;
 import com.pragma.powerup.domain.model.Orden;
 import com.pragma.powerup.domain.model.Ordenes.OrdenResponse;
 import org.mapstruct.Mapper;
@@ -13,7 +14,7 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderResponseMapper {
 
-    OrdenRequestDTO toResponse(Orden orderModel);
-    List<OrdenRequestDTO> toResponseList(List<Orden> orderModels);
-    List<OrdenRequestDTO> toOrderResponseList(List<OrdenResponse> orderResponseModels);
+    OrdenRequestDTO toResponse(Orden order);
+    List<OrdenRequestDTO> toResponseList(List<Orden> order);
+    List<OrdenResponseDTO> toOrdenResponseList(List<OrdenResponse> orderResponseModels);
 }

@@ -20,7 +20,7 @@ public class OrdenPlatoEntity {
     @Column(name = "pedido_plato_id", nullable = false)
     private Long id;
     @JoinColumn(name = "pedido_id", nullable = false)
-    private Orden pedido;
+    private OrdenEntity pedido;
     @JoinColumn(name = "plato_id", nullable = false)
     private PlatoEntity plato;
     @Column(name = "cantidad", nullable = false)

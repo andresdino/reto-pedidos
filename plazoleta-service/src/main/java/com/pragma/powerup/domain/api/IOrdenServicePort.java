@@ -13,8 +13,10 @@ public interface IOrdenServicePort {
 
     void takeOrderAndUpdateStatus(Long idOrder, String estado);
 
-    void updateAndNotifyOrderReady(Long idOrder);
+    void updateAndNotifyOrdenReady(Long idOrder);
 
     void deliverOrder(Long idOrder, String pin);
+
+    //void cancelOrden(Long idOrder);
 
 }

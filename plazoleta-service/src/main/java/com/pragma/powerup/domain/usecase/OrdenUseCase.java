@@ -149,7 +149,7 @@ public class OrdenUseCase implements IOrdenServicePort {
         }
 
         @Override
-        public void updateAndNotifyOrderReady(Long idOrder) {
+        public void updateAndNotifyOrdenReady(Long idOrder) {
             if(Boolean.FALSE.equals(ordenPersistencePort.existsByIdAndEstado(idOrder, "EN_PREPARACION"))) throw new NoDataFoundException();
             String bearerToken = token.getBearerToken();
             if(bearerToken==null) throw new OwnerNotAuthenticatedException();
