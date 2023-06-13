@@ -29,6 +29,12 @@ public class UserHandler implements IUserHandler {
         userServicePort.saveUser(user);
     }
 
+    @Override
+    public void saveRestaurantEmployee(UserRequestDTO userRequestDTO) {
+        User user= userRequestMapper.toUSer(userRequestDTO);
+        userServicePort.saveRestaurantEmployee(user);
+    }
+
 
 
     @Override
@@ -39,7 +45,25 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public List<UserResponseDTO> getAllUser() {
+    public UserResponseDTO getUserByCorreo(String correo) {
+        UserResponseDTO usuarioResponseDto = userResponseMapper.toResponse(userServicePort.getUserByCorreo(correo));
+        return usuarioResponseDto;
+    }
+
+
+    @Override
+    public Boolean existsUserById(Long id) {
+
+        return userServicePort.existsUserById(id);
+    }
+    @Override
+    public List<UserResponseDTO> getAllUsers() {
         return userResponseMapper.toResponseList(userServicePort.getAllUser());
     }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userServicePort.deleteUserById(id);
+    }
+
 }

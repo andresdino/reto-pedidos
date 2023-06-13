@@ -41,7 +41,6 @@ public class UserUseCase implements IUserServicePort {
         user.setClave(userPassEncryptPort.encode(user.getClave()));
         userPersistencePort.saveUser(user);
     }
-
     private void validateRolesAuthAndNot(User user){
         String bearerToken = token.getBearerToken();
         Rol rol = new Rol();
@@ -74,11 +73,22 @@ public class UserUseCase implements IUserServicePort {
     public User getUserById(Long id) {
         return userPersistencePort.getUserById(id);
     }
-
     @Override
     public List<User> getAllUser() {
-
         return userPersistencePort.getAllUser();
+    }
+    @Override
+    public Boolean existsUserById(Long id) {
+        return userPersistencePort.existsUserById(id);
+    }
+    @Override
+    public void deleteUserById(Long id) {
+        userPersistencePort.deleteUserById(id);
+    }
+
+    @Override
+    public User getUserByCorreo(String correo) {
+        return null;
     }
 
     @Override

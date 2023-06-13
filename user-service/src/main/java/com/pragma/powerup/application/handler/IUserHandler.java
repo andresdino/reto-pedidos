@@ -10,8 +10,15 @@ public interface IUserHandler {
 
     void saveUser(UserRequestDTO userRequestDTO);
 
+    void saveRestaurantEmployee(UserRequestDTO userRequestDTO);
+
     UserResponseDTO getUserById(Long id);
 
-    List<UserResponseDTO> getAllUser();
+    UserResponseDTO getUserByCorreo(String correo);
 
+    Boolean existsUserById(Long id);
+
+    List<UserResponseDTO> getAllUsers();
+
+    void deleteUserById(Long id);
 }

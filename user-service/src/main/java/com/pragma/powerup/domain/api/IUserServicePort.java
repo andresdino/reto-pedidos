@@ -14,6 +14,11 @@ public interface IUserServicePort {
 
    List<User> getAllUser();
 
+    Boolean existsUserById(Long id);
+
+    void deleteUserById(Long id);
+
+    User  getUserByCorreo (String correo);
 
     void saveRestaurantEmployee(User user);
 }

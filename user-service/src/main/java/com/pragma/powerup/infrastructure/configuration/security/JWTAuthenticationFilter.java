@@ -24,13 +24,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
         } catch (IOException e) {
         }
-
         UsernamePasswordAuthenticationToken usernamePAT = new UsernamePasswordAuthenticationToken(
                 authCredentials.getCorreo(),
                 authCredentials.getPassword(),
                 Collections.emptyList()
         );
-
         return getAuthenticationManager().authenticate(usernamePAT);
     }
 
@@ -41,8 +39,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException, ServletException {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
-        System.out.println(Arrays.stream(userDetails.getAuthorities().toArray()).findFirst().toString());
-        userDetails.getAuthorities().toString();
         Object[] authorities = userDetails.getAuthorities().toArray();
         System.out.println(authorities[0].toString());
         String token = TokenUtils.createToken(userDetails.getNombre(), userDetails.getUsername(),

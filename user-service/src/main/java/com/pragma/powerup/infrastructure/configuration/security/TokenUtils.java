@@ -35,7 +35,7 @@ public class TokenUtils {
                 .setSubject(correo)
                 .setExpiration(expirationDate)
                 .addClaims(extra)
-                .signWith(SignatureAlgorithm.HS256, ACCESS_TOKEN_SECRET.getBytes())
+                .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                 .compact();
     }
 
