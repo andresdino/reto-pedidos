@@ -20,4 +20,6 @@ public interface IPlatoServicePort {
 
     void putEnableDisablePlato(Long platoId, Long flag);
 
+    List<Plato> findAllByRestauranteId(Long idRestaurante, Integer page, Integer size);
+
 }

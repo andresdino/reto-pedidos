@@ -18,5 +18,7 @@ public interface IPlatoHandler {
 
     void putPlato(Long id, PlatoRequestPutDTO platoRequestPutDTO);
 
+    List<PlatoResponseDTO> findAllByRestauranteId(Long idRestaurante, Integer page, Integer size);
+
     void putEnableDiseablePlato(Long platoId, Long flag);
 }

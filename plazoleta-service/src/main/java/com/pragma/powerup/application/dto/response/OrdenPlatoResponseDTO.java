@@ -1,8 +1,13 @@
 package com.pragma.powerup.application.dto.response;
 
 import com.pragma.powerup.domain.model.Categoria;
+import lombok.Getter;
+import lombok.Setter;
 
-public class OrderDishResponseDTO {
+
+@Getter
+@Setter
+public class OrdenPlatoResponseDTO {
 
     private Long id;
     private String nombre;

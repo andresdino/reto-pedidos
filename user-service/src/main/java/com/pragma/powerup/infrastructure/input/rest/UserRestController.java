@@ -107,6 +107,8 @@ public class UserRestController {
         return  ResponseEntity.ok((userHandler.getUserByCorreo(correo)));
     }
 
+
+
     @Operation(summary = "Detele a user by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User deleted", content = @Content),

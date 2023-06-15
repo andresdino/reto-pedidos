@@ -5,6 +5,7 @@ import com.pragma.powerup.domain.spi.IObjectPersistencePort;
 import com.pragma.powerup.domain.spi.IToken;
 import com.pragma.powerup.domain.spi.feignClients.IUserFeignClientPort;
 import com.pragma.powerup.domain.spi.persistence.*;
+import com.pragma.powerup.domain.spi.persistence.IPlatoPersistencePort;
 import com.pragma.powerup.domain.api.IRestaurantEmployeeServicePort;
 import com.pragma.powerup.domain.usecase.*;
 import com.pragma.powerup.infrastructure.out.jpa.adapter.*;
@@ -81,7 +82,7 @@ public class BeanConfiguration {
 
     @Bean
     public IPlatoServicePort platoServicePort(){
-        return new PlatoUseCase(platoPersistencePort(), restaurantPersistencePort(), categoriaPersistencePort());
+        return new PlatoUseCase(platoPersistencePort(), restaurantPersistencePort(), categoriaPersistencePort(), token());
     }
 
 

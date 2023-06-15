@@ -34,10 +34,10 @@ public class OrdenHandler implements IOrdenHandler {
         ordenServicePort.saveOrden(orderRequestModel);
     }
 
-   /* @Override
+    @Override
     public List<OrdenResponseDTO> getAllOrdenesWithPagination(Integer page, Integer size, String estado) {
         return ordenResponseMapper.toOrdenResponseList(ordenServicePort.getAllOrdersWithPagination(page,size,estado));
-    }*/
+    }
 
     @Override
     public void takeOrdenAndUpdateStatus(Long idOrden, String estado) {

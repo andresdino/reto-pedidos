@@ -8,10 +8,13 @@ import com.pragma.powerup.infrastructure.out.jpa.entity.PlatoEntity;
 import com.pragma.powerup.infrastructure.out.jpa.mapper.IPlatoEntityMapper;
 import com.pragma.powerup.infrastructure.out.jpa.repository.IPlatoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class PlatoAdapter implements IPlatoPersistencePort {
@@ -41,6 +44,16 @@ public class PlatoAdapter implements IPlatoPersistencePort {
         }
         return platoEntityMapper.toPlatolList(platoEntityList);
     }
+
+    @Override
+    public List<Plato> findAllByRestauranteId(Long idRestaurante, Integer page, Integer size) {
+        Pageable pageable= PageRequest.of(page,size, Sort.by("categoriaId"));
+        return platoRepository.findAllByRestaurantId(idRestaurante, pageable)
+                .stream()
+                .map(platoEntityMapper::toPlato)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void deletePlatoById(Long id) {

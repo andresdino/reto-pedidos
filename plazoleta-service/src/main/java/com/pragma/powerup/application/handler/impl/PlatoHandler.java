@@ -29,7 +29,6 @@ public class PlatoHandler implements IPlatoHandler {
 
         Plato plato = platoRequestMapper.toPlato(platoRequestDTO);
         platoServicePort.savePlato(plato);
-
     }
 
     @Override
@@ -57,6 +56,14 @@ public class PlatoHandler implements IPlatoHandler {
 
         Plato plato = platoRequestMapper.toPutPlato(platoRequestPutDTO);
         platoServicePort.putPlato( id, plato);
+    }
+
+    public List<PlatoResponseDTO> findAllByRestauranteId(Long idRestaurante ,Integer page, Integer size){
+        List<Plato> platoList = platoServicePort.findAllByRestauranteId(idRestaurante,page,size);
+        if (platoList.isEmpty()){
+            throw new NoDataFoundException();
+        }
+        return platoResponseMapper.toResponseList(platoList);
     }
 
     @Override

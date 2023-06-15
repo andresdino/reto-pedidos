@@ -12,6 +12,8 @@ public interface IPlatoPersistencePort {
 
     List<Plato> getAllPlato();
 
+    List<Plato> findAllByRestauranteId(Long idRestaurante, Integer page, Integer size);
+
     void deletePlatoById(Long id);
 
 

@@ -40,7 +40,7 @@ public class OrdenRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-   /* @Operation(summary = "Get Orders By State")
+    @Operation(summary = "Get Orders By State")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "302", description = "Orders found", content = @Content),
             @ApiResponse(responseCode = "404", description = "Orders don't exists", content = @Content),
